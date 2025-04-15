@@ -55,3 +55,11 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
+// src/app.js
+const authMiddleware = require('./middlewares/authMiddleware');
+
+// Rota para dashboard
+app.get('/dashboard', authMiddleware, (req, res) => {
+  res.render('dashboard'); // Crie um arquivo views/dashboard.ejs
+});
