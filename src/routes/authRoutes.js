@@ -12,3 +12,12 @@ router.get('/', (req, res) => {
 router.post('/login', authController.login);
 
 module.exports = router;
+
+const { body } = require('express-validator');
+
+router.post('/login', 
+  body('email').isEmail().withMessage('Email inválido'),
+  body('password').isLength({ min: 6 }).withMessage('Senha deve ter no mínimo 6 caracteres'),
+  authController.login
+);
+router.get('/logout', authController.logout);
