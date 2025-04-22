@@ -57,7 +57,7 @@ app.listen(port, () => {
 });
 
 // src/app.js
-const authMiddleware = require('./middlewares/authMiddleware');
+const authMiddleware = require('/Users/joaotop50/Desktop/mvp-project/src/middlewares/authMiddleware.js');
 
 // Rota para dashboard
 app.get('/dashboard', authMiddleware, (req, res) => {
