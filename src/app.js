@@ -38,10 +38,15 @@ app.use('/', authRoutes);
 // Middleware para tratar erros
 app.use(errorHandler);
 
+const connectDB = require('./config/database'); // Certifique-se de que o arquivo database.js está correto
+
 // Conectar ao MongoDB
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Conectado ao MongoDB'))
-  .catch(err => console.error('Erro ao conectar ao MongoDB', err));
+connectDB()
+  .then(() => console.log('Conexão com o MongoDB estabelecida com sucesso'))
+  .catch((err) => {
+    console.error('Erro ao conectar ao MongoDB:', err);
+    process.exit(1); // Encerra o processo em caso de erro
+  });
 
 // Definir porta do servidor
 const port = process.env.PORT || 3000;
@@ -63,3 +68,4 @@ const authMiddleware = require('/Users/joaotop50/Desktop/mvp-project/src/middlew
 app.get('/dashboard', authMiddleware, (req, res) => {
   res.render('dashboard'); // Crie um arquivo views/dashboard.ejs
 });
+
