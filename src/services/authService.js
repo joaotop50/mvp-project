@@ -1,5 +1,4 @@
 const User = require('../models/User');
-const bcrypt = require('bcryptjs'); // Certifique-se de usar bcryptjs
 const jwt = require('jsonwebtoken');
 
 exports.loginUser = async (email, password) => {
@@ -10,8 +9,8 @@ exports.loginUser = async (email, password) => {
       return { error: 'Usuário não encontrado' };
     }
 
-    // Compara a senha fornecida com o hash armazenado
-    const isMatch = await bcrypt.compare(password, user.password);
+    // Comparar a senha diretamente (sem bcrypt)
+    const isMatch = password === user.password;
     if (!isMatch) {
       return { error: 'Senha incorreta' };
     }
